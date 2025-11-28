@@ -162,7 +162,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
                     <!-- 🔹 Enlaces actualizados -->
-                    <li class="nav-item"><a class="nav-link" href="#vehiculos">Vehículos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#vehiculos">Vehículos..</a></li>
                     <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#rutas">Rutas Turísticas</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
