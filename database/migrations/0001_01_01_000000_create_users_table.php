@@ -13,13 +13,43 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
+            // Datos básicos
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Campos comunes
+            $table->string('phone')->nullable();
+            $table->string('avatar')->nullable();
+            $table->boolean('status')->default(true); // true = activo, false = inactivo
+
+            // ---------------------------
+            // CAMPOS DEL CLIENTE
+            // ---------------------------
+            $table->string('dui')->nullable();
+            $table->string('address')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('license_number')->nullable();
+            $table->date('license_expiry_date')->nullable();
+            $table->boolean('is_company')->default(false);
+            $table->string('company_name')->nullable();
+            $table->string('company_nit')->nullable();
+
+            // ---------------------------
+            // CAMPOS DEL CHOFER
+            // ---------------------------
+            $table->string('driver_license_number')->nullable();
+            $table->string('driver_license_category')->nullable();
+            $table->date('driver_license_expiry')->nullable();
+            $table->boolean('available')->default(true);
+            $table->float('rating')->default(0);
+
             $table->rememberToken();
             $table->timestamps();
         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
