@@ -354,7 +354,7 @@
                         @endcan
 
 
-                        @can('menu catalogos')
+
                             <!-- Start::slide -->
                             <li class="slide has-sub" id="catalogoMenu">
                                 <a href="javascript:void(0);" class="side-menu__item">
@@ -373,29 +373,10 @@
 
                                     <li class="slide">
 
-                                        <a href="{{ route('tipo_ingreso.index') }}" id="tipoIngresoOption"
-                                            class="side-menu__item">Tipos de ingreso</a>
+                                        <a href="{{ route('ruta.index') }}" id="rutaOption"
+                                            class="side-menu__item">Rutas</a>
 
-                                        <a href="{{ route('agente_tributario.index') }}" id="agenteTributarioOption"
-                                            class="side-menu__item">Agentes tributarios</a>
 
-                                        <a href="{{ route('banco.index') }}" id="bancoOption"
-                                            class="side-menu__item">Banco</a>
-
-                                        <a href="{{ route('cuenta.index') }}" id="cuentaOption"
-                                            class="side-menu__item">Cuentas</a>
-
-                                        <a href="{{ route('colecturia.index') }}" id="colecturiaOption"
-                                            class="side-menu__item">Colecturias</a>
-
-                                        <a href="{{ route('region.index') }}" id="regionOption"
-                                            class="side-menu__item">Regiones</a>
-
-                                        <a href="{{ route('tipopago.index') }}" id="tipopagoOption"
-                                            class="side-menu__item">Tipos de Pago</a>
-
-                                        <a href="{{ route('ingreso_diario.index') }}" id="ingresodiarioOption"
-                                            class="side-menu__item">Ingresos Diarios</a>
 
 
                                     </li>
@@ -403,7 +384,7 @@
                                 </ul>
                             </li>
                             <!-- End::slide -->
-                        @endcan
+
 
 
                         @can('menu transacciones')
