@@ -20,4 +20,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('vehiculos', VehiculoController::class);
 Route::resource('categorias_rutas', CategoriaRutaController::class);
+
+
+
+
+
+
 Route::resource('ruta', RutaController::class);
