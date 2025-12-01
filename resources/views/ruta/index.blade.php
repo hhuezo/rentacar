@@ -23,7 +23,7 @@
                         Listado de rutas
                     </div>
                     <div class="prism-toggle">
-                        <a href="{{ url('rutas/create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ url('ruta/create') }}" class="btn btn-primary">Nuevo</a>
 
 
                     </div>
