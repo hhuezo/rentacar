@@ -8,11 +8,9 @@ use Illuminate\Support\Str;
 
 class VehiculoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        dd("");
         $vehiculos = Vehiculo::get();
 
         return view('vehiculos.index', compact('vehiculos'));

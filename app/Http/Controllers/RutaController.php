@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-=======
 use App\Models\CategoriaRuta;
 use App\Models\Ruta;
 use App\Models\RutaImagen;
->>>>>>> 920f15d (create ruta)
 use Illuminate\Http\Request;
 
 class RutaController extends Controller
@@ -17,13 +14,9 @@ class RutaController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-=======
         $rutas = Ruta::get();
 
         return view('ruta.index', compact('rutas'));
->>>>>>> 920f15d (create ruta)
     }
 
     public function create()
