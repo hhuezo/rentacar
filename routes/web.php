@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoriaRutaController;
+use App\Http\Controllers\RutaController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('vehiculos', VehiculoController::class);
+Route::resource('categorias_rutas', CategoriaRutaController::class);
+Route::resource('ruta', RutaController::class);
