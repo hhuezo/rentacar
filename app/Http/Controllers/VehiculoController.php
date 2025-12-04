@@ -10,7 +10,6 @@ class VehiculoController extends Controller
 {
     public function index()
     {
-        dd("");
         $vehiculos = Vehiculo::get();
 
         return view('vehiculos.index', compact('vehiculos'));
