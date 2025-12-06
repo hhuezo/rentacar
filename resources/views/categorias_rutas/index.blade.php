@@ -1,4 +1,10 @@
-@extends ('menu')
+
+@extends('menu')
+
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @section('content')
     <!-- DataTables CSS -->
     <link href="{{ asset('assets/libs/dataTables/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
@@ -14,16 +20,17 @@
 
 
 
+
     <!-- Start:: row-1 -->
     <div class="row">
         <div class="col-xl-12">
             <div class="card custom-card">
                 <div class="card-header justify-content-between">
                     <div class="card-title">
-                        Listado de rutas
+                        Listado de Categorias de rutas
                     </div>
                     <div class="prism-toggle">
-                        <a href="{{ url('ruta/create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ url('categorias_rutas/create') }}" class="btn btn-primary">Nuevo</a>
 
 
                     </div>
@@ -56,44 +63,44 @@
                         <table id="datatable-basic" class="table table-striped text-nowrap w-100">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>ID</th>
+
                                     <th>Nombre</th>
-                                    <th>Categoría</th>
-                                    <th>Duración</th>
-                                    <th>Precio</th>
-                                    <th>Punto Inicio</th>
-                                    <th>Punto Fin</th>
+                                    <th>Icono</th>
                                     <th>Activo</th>
                                     <th>Opciones</th>
+
+
                                 </tr>
                             </thead>
-
                             <tbody>
-                                @foreach ($rutas as $item)
+                                @foreach ($categorias_rutas as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
                                         <td>{{ $item->nombre }}</td>
 
-                                        <!-- Mostrar nombre categoría -->
-                                        <td>{{ $item->categoria->nombre ?? 'Sin categoría' }}</td>
-
-                                        <td>{{ $item->duracion }}</td>
-                                        <td>${{ number_format($item->precio, 2) }}</td>
-
-                                        <td>{{ $item->punto_inicio }}</td>
-                                        <td>{{ $item->punto_fin }}</td>
-
-
-                                        <!-- Activo -->
                                         <td>
-                                            @if ($item->activo)
-                                                <span class="badge bg-success">Sí</span>
+                                            @php
+                                                // Validar si es imagen por la extensión
+                                                $esImagen = Str::endsWith($item->icono, ['jpg', 'jpeg', 'png', 'webp']);
+                                            @endphp
+
+                                            @if ($esImagen)
+                                                <img src="{{ asset('categorias_rutas_files/' . $item->icono) }}"
+                                                    alt="icono"
+                                                    style="width:40px; height:40px; object-fit:cover; border-radius:5px;">
                                             @else
-                                                <span class="badge bg-danger">No</span>
+                                                <i class="{{ $item->icono }}" style="font-size: 30px;"></i>
                                             @endif
                                         </td>
 
-                                        <!-- Botones -->
+
+                                        <td>
+                                            @if ($item->activo == 1)
+                                                <span class="badge bg-success">Activo</span>
+                                            @else
+                                                <span class="badge bg-danger">Inactivo</span>
+                                            @endif
+                                        </td>
+
                                         <td>
                                             <button class="btn btn-sm btn-info btn-wave" data-bs-toggle="modal"
                                                 data-bs-target="#modal-edit-{{ $item->id }}">
@@ -109,7 +116,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
                 </div>
 

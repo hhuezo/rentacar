@@ -8,9 +8,6 @@ use Illuminate\Support\Str;
 
 class VehiculoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $vehiculos = Vehiculo::get();
@@ -165,6 +162,84 @@ class VehiculoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        // 🔍 Validación
+    $validated = $request->validate([
+
+        'marca'       => 'required|string|max:255',
+        'modelo'      => 'required|string|max:255',
+        'anio'        => 'required|string|max:10',
+        'placa'       => 'required|string|max:255',
+        'color'       => 'required|string|max:255',
+        'capacidad'   => 'required|string|max:10',
+        'precio_dia'  => 'required|string|max:10',
+
+        // Foto opcional en update
+        'foto'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+        'descripcion' => 'required|string|max:255',
+
+    ], [
+
+        // Mensajes personalizados igual que el create
+
+        'marca.required' => 'La marca es obligatoria.',
+        'modelo.required' => 'El modelo es obligatorio.',
+        'anio.required' => 'El año es obligatorio.',
+        'placa.required' => 'La placa es obligatoria.',
+        'color.required' => 'El color es obligatorio.',
+        'capacidad.required' => 'La capacidad es obligatoria.',
+        'precio_dia.required' => 'El precio por día es obligatorio.',
+
+        'foto.image'    => 'El archivo debe ser una imagen válida.',
+        'foto.mimes'    => 'La imagen debe ser de tipo JPG, JPEG, PNG o WEBP.',
+        'foto.max'      => 'La imagen no debe exceder los 2MB.',
+
+        'descripcion.required' => 'La descripción es obligatoria.',
+    ]);
+
+    try {
+
+        $vehiculos = Vehiculo::findOrFail($id);
+
+        $vehiculos->marca = $request->marca;
+        $vehiculos->modelo = $request->modelo;
+        $vehiculos->anio = $request->anio;
+        $vehiculos->placa = $request->placa;
+        $vehiculos->color = $request->color;
+        $vehiculos->capacidad = $request->capacidad;
+        $vehiculos->precio_dia = $request->precio_dia;
+        $vehiculos->descripcion = $request->descripcion;
+
+        // ==== MANEJO DE FOTO (actualizar) ====
+
+        if ($request->hasFile('foto')) {
+
+            // borrar foto anterior si existe
+            if ($vehiculos->foto && file_exists(public_path('vehiculos/' . $vehiculos->foto))) {
+                unlink(public_path('vehiculos/' . $vehiculos->foto));
+            }
+
+            $file = $request->file('foto');
+
+            // crear nombre único
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            // guardar en carpeta public/vehiculos
+            $file->move(public_path('vehiculos'), $filename);
+
+            // guardar nuevo nombre en BD
+            $vehiculos->foto = $filename;
+        }
+
+        $vehiculos->save();
+
+        return redirect()->back()->with('success', 'Vehículo actualizado correctamente.');
+
+    } catch (\Exception $e) {
+
+        return redirect()->back()->with('error', 'Hubo un error: ' . $e->getMessage());
+    }
         //
     }
 
