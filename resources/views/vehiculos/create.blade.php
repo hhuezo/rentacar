@@ -23,12 +23,12 @@
                         Nuevo vehiculo
                     </div>
                     <div class="prism-toggle">
-                        <a href="{{ url('vehiculos/create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ url('vehiculo/create') }}" class="btn btn-primary">Nuevo</a>
 
 
                     </div>
                 </div>
-                <form method="POST" action="{{ route('vehiculos.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('vehiculo.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
 
